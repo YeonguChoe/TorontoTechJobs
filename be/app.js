@@ -9,7 +9,9 @@ const userRoutes = require("./routes/users");
 app.use(express.json());
 
 // MongoDB
-const mongoURI = "mongodb://localhost:27017/TorontoTechJobs";
+const mongoURI =
+  "mongodb+srv://torontoTechJobs:<password>@torontotechjobs.7ompgsu.mongodb.net/TorontoTechJobs?retryWrites=true&w=majority";
+
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,

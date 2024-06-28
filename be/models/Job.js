@@ -24,6 +24,7 @@ const jobSchema = new mongoose.Schema({
   postedDate: {
     type: Date,
     default: Date.now,
+    expires: "14d",
   },
 });
 
