@@ -7,10 +7,10 @@ const jobRoutes = require("./routes/jobs");
 const userRoutes = require("./routes/users");
 
 app.use(express.json());
+require("dotenv").config();
 
 // MongoDB
-const mongoURI =
-  "mongodb+srv://torontoTechJobs:<password>@torontotechjobs.7ompgsu.mongodb.net/TorontoTechJobs?retryWrites=true&w=majority";
+const mongoURI = process.env.DATABASE_URI;
 
 mongoose
   .connect(mongoURI, {

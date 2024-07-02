@@ -47,6 +47,17 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Route to get a job by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.id);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+    res.json(job);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Route to update a job
 router.patch("/:id", async (req, res) => {
   try {
