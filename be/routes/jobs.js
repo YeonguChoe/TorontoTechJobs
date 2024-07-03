@@ -58,6 +58,31 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Route to get a job by language
+router.get("/filter", async (req, res) => {
+  try {
+    // passing form: language=Javascript
+    const { language } = req.query; // Get the language from the query parameters
+
+    if (!language) {
+      return res
+        .status(400)
+        .json({ message: "Language query parameter is required" });
+    }
+
+    const jobs = await Job.find({ language: language });
+    if (jobs.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No jobs found for the specified language" });
+    }
+
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Route to update a job
 router.patch("/:id", async (req, res) => {
   try {

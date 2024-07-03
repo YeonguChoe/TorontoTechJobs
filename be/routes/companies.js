@@ -1,63 +1,63 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const Company = require("../models/Company");
 const auth = require("../middleware/auth");
 
-// User registration route
+// Company registration route
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password, linkedinID } = req.body;
+    const { companyName, email, password, companyURL } = req.body;
 
-    // Check if the user already exists
-    let user = await User.findOne({ email });
-    if (user)
+    // Check if the company already exists
+    let company = await Company.findOne({ email });
+    if (company)
       return res.status(400).json({
-        message: "User already exists. Please try with different email.",
+        message: "company already exists. Please try with different email.",
       });
 
-    user = new User({ username, email, password, linkedinID });
-    await user.save();
+    company = new Company({ companyName, email, password, companyURL });
+    await company.save();
 
-    const payload = { id: user.id, username: user.username };
+    const payload = { id: company.id, CompanyName: company.companyName };
     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
 
-    res.status(201).json({ token, user: payload });
+    res.status(201).json({ token, company: payload });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// User login route
+// Company login route
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user)
+    const company = await Company.findOne({ email });
+    if (!company)
       return res
         .status(400)
         .json({ message: "Invalid credentials - wrong email" });
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await company.comparePassword(password);
     if (!isMatch)
       return res
         .status(400)
         .json({ message: "Invalid credentials - wrong password" });
 
-    const payload = { id: user.id, username: user.username };
+    const payload = { id: company.id, companyName: company.companyName };
     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
 
-    res.json({ token, user: payload });
+    res.json({ token, company: payload });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Update user information
+// Update company information
 router.patch("/update", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["username", "email", "password"];
+  const allowedUpdates = ["email", "password", "companyURL"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -67,19 +67,19 @@ router.patch("/update", auth, async (req, res) => {
   }
 
   try {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const company = await Company.findById(req.company.id);
+    if (!company) return res.status(404).json({ message: "Company not found" });
 
-    updates.forEach((update) => (user[update] = req.body[update]));
+    updates.forEach((update) => (company[update] = req.body[update]));
 
     // If password is being updated, hash it before saving
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(req.body.password, salt);
+      company.password = await bcrypt.hash(req.body.password, salt);
     }
 
-    await user.save();
-    res.json(user);
+    await company.save();
+    res.json(company);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

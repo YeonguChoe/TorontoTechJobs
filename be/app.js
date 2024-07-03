@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const jobRoutes = require("./routes/jobs");
-const userRoutes = require("./routes/users");
+const companyRoutes = require("./routes/companies");
 
 app.use(express.json());
 require("dotenv").config();
@@ -35,7 +35,7 @@ db.on("disconnected", () => {
 });
 
 app.use("/jobs", jobRoutes);
-app.use("/users", userRoutes);
+app.use("/companies", companyRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
