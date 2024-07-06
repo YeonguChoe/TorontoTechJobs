@@ -6,6 +6,7 @@ import ErrorPage from "./error-page.jsx";
 import Post from "./routes/post.jsx";
 import Create from "./routes/create.jsx";
 import SignIn from "./routes/signin.jsx";
+import SignUp from "./routes/signup.jsx";
 
 const router = createBrowserRouter([
     {
@@ -18,13 +19,16 @@ const router = createBrowserRouter([
                 element: <Post/>
             },
             {
-                path: "create-post/",
+                path: "new-post/",
                 element: <Create/>
-            }
-            ,
+            },
             {
-                path: "signin",
+                path: "sign-in",
                 element: <SignIn/>
+            },
+            {
+                path: "sign-up",
+                element: <SignUp/>
             }
         ]
     },
