@@ -7,6 +7,7 @@ import Post from "./routes/post.jsx";
 import Create from "./routes/create.jsx";
 import SignIn from "./routes/signin.jsx";
 import SignUp from "./routes/signup.jsx";
+import Edit from "./routes/edit.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "new-post/",
                 element: <Create/>
+            },
+            {
+                path: "edit/:postID",
+                element: <Edit/>
             },
             {
                 path: "sign-in",
