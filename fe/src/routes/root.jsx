@@ -14,10 +14,7 @@ export default function Root() {
     return (
         <React.Fragment>
             <Navbar/>
-
-            <JobList/>
-
-            {atHomePage ? null : <Outlet/>}
+            {atHomePage ? <JobList/> : <Outlet/>}
         </React.Fragment>
     );
 }

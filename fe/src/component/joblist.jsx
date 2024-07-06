@@ -1,38 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function JobList() {
 
-    const posts = [
-        {
-            id: 1,
-            title: "Software Developer",
-            location: "Toronto",
-            field: "BE",
-            description: "Need to know programming language"
-        },
-        {
-            id: 2,
-            title: "Programmer",
-            location: "Markham",
-            field: "BE",
-            description: "Embedded C development experience"
-        },
-        {
-            id: 3,
-            title: "Java Spring developer",
-            location: "North York",
-            field: "BE",
-            description: "5+ years of Java experience"
-        }
-    ];
+    const [jobPosts, setJobPosts] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3000/jobs")
+            .then(res => {
+                setJobPosts(res.data);
+            })
+    }, []);
 
     return (
         <React.Fragment>
             <div>
                 <h2>Job Listing</h2>
                 <ul>
-                    {posts.map((item) => (
-                        <li key={item.id}>
+                    {jobPosts.map((item) => (
+                        <li key={item._id}>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                         </li>
