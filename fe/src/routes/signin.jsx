@@ -1,26 +1,49 @@
-import React from "react";
+import React, {useState} from "react";
 import '../styles/authentication.css'
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 export default function SignIn() {
+
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
+
+    let [loginFail, setLogInFail] = useState("");
+
+    function handleSignInBtn() {
+        let newJSON = {
+            email: email,
+            password: password
+        }
+        axios.post("http://localhost:3000/companies/login", newJSON).then(res => {
+            if (res.status === 200) {
+                window.location.href = '/';
+            }
+        }).catch(err => {
+            setLogInFail("LogIn has failed!!!");
+        })
+    }
+
     return (
         <React.Fragment>
             <h1>Sign In</h1>
             <form>
-                <label htmlFor='id'>ID:</label>
-                <input type="text" id='id'/>
-                <label htmlFor='pw'>Password</label>
-                <input type="password" id='pw'/>
-                <button>Sign In</button>
+                <label htmlFor='email'>Company Email:</label>
+                <input type="email" id='email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <label htmlFor='pw' value={password}>Password</label>
+                <input type="password" id='pw' onChange={e => setPassword(e.target.value)}/>
+                <button type="button" onClick={handleSignInBtn}>Sign In</button>
             </form>
-
+            <br/>
             <form>
                 <Link to="/sign-up">
-                    <button>Sign Up</button>
+                    <button onClick={() => {
+                        window.location.href = '/sign-up'
+                    }}>Sign Up
+                    </button>
                 </Link>
             </form>
-
+            {loginFail && <h1 style={{color: '#ff0000'}}>{loginFail}</h1>}
         </React.Fragment>
     );
-
 }

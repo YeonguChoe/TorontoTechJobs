@@ -6,7 +6,6 @@ export default function Edit() {
 
     let {postID} = useParams();
 
-
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
     const [jobField, setJobField] = useState("");
@@ -14,10 +13,8 @@ export default function Edit() {
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
 
-
     useEffect(() => {
         axios.get(`http://localhost:3000/jobs/${postID}`).then(res => {
-            console.log(res.data);
             setTitle(res.data.title);
             setJobField(res.data.language);
             setCompany(res.data.company);
@@ -38,7 +35,7 @@ export default function Edit() {
         };
 
         axios.patch(`http://localhost:3000/jobs/${postID}`, newJSON).then(res => {
-            console.log(res)
+            window.location.href = '/';
         })
     }
 
@@ -59,21 +56,22 @@ export default function Edit() {
                 <label>
                     Job Title:
                     <br/>
-                    <input type='text' defaultValue={title} onChange={setTitle} required/>
+                    <input type='text' defaultValue={title} onChange={e => setTitle(e.target.value)} required/>
                 </label>
 
                 <h5>Company: {company}</h5>
                 <h5>Last edited: {lastEdit}</h5>
                 <label>
                     Location: <br/>
-                    <input type='text' defaultValue={location} onChange={setLocation} required/>
+                    <input type='text' defaultValue={location} onChange={e => setLocation(e.target.value)} required/>
                     <br/>
                 </label>
 
-                <label>Job Explanation: <br/><textarea defaultValue={description} onChange={setDescription}/></label>
+                <label>Job Explanation: <br/><textarea defaultValue={description}
+                                                       onChange={e => setDescription(e.target.value)}/></label>
 
                 <br/>
-                <button type='submit' onClick={handleEditBtn}>Submit</button>
+                <button type='button' onClick={handleEditBtn}>Submit</button>
             </form>
         </React.Fragment>
     )
