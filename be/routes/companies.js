@@ -34,16 +34,10 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const company = await Company.findOne({ email });
-    if (!company)
-      return res
-        .status(400)
-        .json({ message: "Invalid credentials - wrong email" });
+    if (!company) return res.status(400).json({ message: false });
 
     const isMatch = await company.comparePassword(password);
-    if (!isMatch)
-      return res
-        .status(400)
-        .json({ message: "Invalid credentials - wrong password" });
+    if (!isMatch) return res.status(400).json({ message: false });
 
     const payload = { id: company.id, companyName: company.companyName };
     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });

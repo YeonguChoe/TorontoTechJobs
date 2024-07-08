@@ -13,8 +13,8 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  language: {
-    type: [String],
+  jobType: {
+    type: String,
     required: true,
   },
   description: {
