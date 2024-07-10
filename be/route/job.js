@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Job = require("../models/Job");
+const Job = require("../model/Job");
 
 // Route to get all job postings
 router.get("/", async (req, res) => {
@@ -15,13 +15,14 @@ router.get("/", async (req, res) => {
 
 // Route to post a new job
 router.post("/", async (req, res) => {
+  valication.check();
   const job = new Job({
     title: req.body.title,
-    company: req.body.company,
+    company_name: req.body.company_name,
     location: req.body.location,
-    jobType: req.body.jobType,
+    job_type: req.body.job_type,
     description: req.body.description,
-    postedDate: req.body.postedDate,
+    posted_date: req.body.posted_date,
   });
 
   try {
@@ -47,23 +48,48 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Route to get a job by jobType
+// Route to get a job by company_name
 router.get("/filter", async (req, res) => {
   try {
-    // passing form: jobType=Frontend
-    const { jobType } = req.query; // Get the jobType from the query parameters
+    // passing form: company_name=companyname
+    const { company_name } = req.query; // Get the company_name from the query parameters
 
-    if (!jobType) {
+    if (!company_name) {
       return res
         .status(400)
-        .json({ message: "jobType query parameter is required" });
+        .json({ message: "company_name query parameter is required" });
     }
 
-    const jobs = await Job.find({ jobType: jobType });
+    const jobs = await Job.find({ company_name: company_name });
     if (jobs.length === 0) {
       return res
         .status(404)
-        .json({ message: "No jobs found for the specified jobType" });
+        .json({ message: "No jobs found for the specified company_name" });
+    }
+
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Route to get a job by job_type
+router.get("/filter", async (req, res) => {
+  try {
+    // passing form: job_type=frontend
+    const { job_type } = req.query; // Get the job_type from the query parameters
+
+    if (!job_type) {
+      return res
+        .status(400)
+        .json({ message: "job_type query parameter is required" });
+    }
+
+    const jobs = await Job.find({ job_type: job_type });
+    if (jobs.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No jobs found for the specified job_type" });
     }
 
     res.json(jobs);

@@ -5,7 +5,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  company: {
+  company_name: {
     type: String,
     required: true,
   },
@@ -13,7 +13,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  jobType: {
+  job_type: {
     type: String,
     required: true,
   },
@@ -21,7 +21,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  postedDate: {
+  posted_date: {
     type: Date,
     default: Date.now,
     expires: "14d",

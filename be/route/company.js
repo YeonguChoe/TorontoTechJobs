@@ -1,26 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const Company = require("../models/Company");
+const Company = require("../model/Company");
 const auth = require("../middleware/auth");
 
 // Company registration route
 router.post("/register", async (req, res) => {
   try {
-    const { companyName, email, password, companyURL } = req.body;
+    const { company_name, email, password, companyURL } = req.body;
 
     // Check if the company already exists
     let company = await Company.findOne({ email });
     if (company)
       return res.status(400).json({
-        message: "company already exists. Please try with different email.",
+        message: "Company already exists. Please try with different email.",
       });
 
-    company = new Company({ companyName, email, password, companyURL });
+    company = new Company({ company_name, email, password, companyURL });
     await company.save();
 
-    const payload = { id: company.id, CompanyName: company.companyName };
-    const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
+    const payload = { id: company.id, company_name: company.company_name };
+    const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "2h" });
 
     res.status(201).json({ token, company: payload });
   } catch (err) {
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
     const isMatch = await company.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: false });
 
-    const payload = { id: company.id, companyName: company.companyName };
+    const payload = { id: company.id, company_name: company.company_name };
     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
 
     res.json({ token, company: payload });

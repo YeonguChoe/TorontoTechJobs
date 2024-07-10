@@ -2,14 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors')
+const cors = require("cors");
 
-const jobRoutes = require("./routes/jobs");
-const companyRoutes = require("./routes/companies");
+const jobRoutes = require("./routes/job");
+const companyRoutes = require("./routes/company");
 
-app.use(cors({
-    origin: 'http://localhost:4000'
-}))
+app.use(
+  cors({
+    origin: "http://localhost:4000",
+  })
+);
 
 app.use(express.json());
 require("dotenv").config();
@@ -18,31 +20,31 @@ require("dotenv").config();
 const mongoURI = process.env.DATABASE_URI;
 
 mongoose
-    .connect(mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 20000,
-    })
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("Could not connect to MongoDB...", err));
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 20000,
+  })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Could not connect to MongoDB...", err));
 
 const db = mongoose.connection;
 
 db.on("connected", () => {
-    console.log("Mongoose connected to " + mongoURI);
+  console.log("Mongoose connected to " + mongoURI);
 });
 
 db.on("error", (err) => {
-    console.error("Mongoose connection error: " + err);
+  console.error("Mongoose connection error: " + err);
 });
 
 db.on("disconnected", () => {
-    console.log("Mongoose disconnected");
+  console.log("Mongoose disconnected");
 });
 
 app.use("/jobs", jobRoutes);
 app.use("/companies", companyRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
