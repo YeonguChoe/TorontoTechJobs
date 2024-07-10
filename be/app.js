@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require("cors");
+const dotenv = require("dotenv-safe");
 
-const jobRoutes = require("./routes/job");
-const companyRoutes = require("./routes/company");
+const jobRoutes = require("./route/job");
+const companyRoutes = require("./route/company");
 
 app.use(
   cors({
@@ -14,10 +15,12 @@ app.use(
 );
 
 app.use(express.json());
+dotenv.config();
 require("dotenv").config();
 
 // MongoDB
-const mongoURI = process.env.DATABASE_URI;
+const mongoURI =
+  process.env.DATABASE_URI || "mongodb://localhost:27017/yourLocalDB";
 
 mongoose
   .connect(mongoURI, {
