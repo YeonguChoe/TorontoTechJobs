@@ -78,7 +78,7 @@ router.delete(
 
 // Route to get a job by company_name
 router.get(
-  "/filter-by-company",
+  "/filter-by-company-name",
   [
     query("company_name")
       .exists()
