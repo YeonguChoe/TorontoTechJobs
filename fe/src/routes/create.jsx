@@ -5,7 +5,7 @@ export default function Create() {
     const [jobTitle, setJobTitle] = useState("Input Job title");
     const [companyName, setCompanyName] = useState("Samsung Electronics");
     const [location, setLocation] = useState("Ontario");
-    const [jobField, setJobField] = useState("frontend");
+    const [jobType, setJobType] = useState("frontend");
     const [description, setDescription] = useState("Input Text");
 
     function updateTitle(e) {
@@ -22,7 +22,7 @@ export default function Create() {
 
     function updateJobField(e) {
         console.log(e.target)
-        setJobField(e.target.value)
+        setJobType(e.target.value)
     }
 
     function updateDescription(e) {
@@ -34,9 +34,9 @@ export default function Create() {
 
         const newJSON = {
             title: jobTitle,
-            company: companyName,
+            company_name: companyName,
             location: location,
-            language: jobField,
+            job_type: jobType,
             description: description
         };
 
@@ -51,12 +51,11 @@ export default function Create() {
             <form>
                 <h1>Create Post</h1>
                 <label htmlFor='job-field'>Job Field: </label>
-                <select id="job-field" onChange={updateJobField} value={jobField}>
+                <select id="job-field" onChange={updateJobField} value={jobType}>
                     <option value='frontend'>Frontend</option>
                     <option value='backend'>Backend</option>
                     <option value='fullstack'>Full Stack</option>
                     <option value='mobile'>Mobile</option>
-                    <option value='embedded'>Embedded</option>
                     <option value='machine learning'>Machine Learning</option>
                 </select>
                 <br/>
