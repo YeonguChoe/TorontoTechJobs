@@ -5,7 +5,7 @@ export default function Create() {
     const [jobTitle, setJobTitle] = useState("Input Job title");
     const [companyName, setCompanyName] = useState("Samsung Electronics");
     const [location, setLocation] = useState("Ontario");
-    const [jobField, setJobField] = useState("Backend");
+    const [jobField, setJobField] = useState("frontend");
     const [description, setDescription] = useState("Input Text");
 
     function updateTitle(e) {
@@ -52,10 +52,12 @@ export default function Create() {
                 <h1>Create Post</h1>
                 <label htmlFor='job-field'>Job Field: </label>
                 <select id="job-field" onChange={updateJobField} value={jobField}>
-                    <option value='Backend'>Backend</option>
-                    <option value='Frontend'>Frontend</option>
-                    <option value='Mobile'>Mobile</option>
-                    <option value='Machine Learning'>Machine Learning</option>
+                    <option value='frontend'>Frontend</option>
+                    <option value='backend'>Backend</option>
+                    <option value='fullstack'>Full Stack</option>
+                    <option value='mobile'>Mobile</option>
+                    <option value='embedded'>Embedded</option>
+                    <option value='machine learning'>Machine Learning</option>
                 </select>
                 <br/>
                 <br/>

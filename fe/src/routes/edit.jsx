@@ -45,10 +45,12 @@ export default function Edit() {
                 <h1>Edit Post</h1>
                 <label htmlFor='job-field'>Job Field: </label>
                 <select id="job-field" value={jobField} onChange={e => setJobField(e.target.value)}>
-                    <option value='Backend'>Backend</option>
-                    <option value='Frontend'>Frontend</option>
-                    <option value='Mobile'>Mobile</option>
-                    <option value='Machine Learning'>Machine Learning</option>
+                    <option value='frontend'>Frontend</option>
+                    <option value='backend'>Backend</option>
+                    <option value='fullstack'>Full Stack</option>
+                    <option value='mobile'>Mobile</option>
+                    <option value='embedded'>Embedded</option>
+                    <option value='machine learning'>Machine Learning</option>
                 </select>
                 <br/>
                 <br/>

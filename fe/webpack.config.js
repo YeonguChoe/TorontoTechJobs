@@ -51,7 +51,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "웹팩 공부",
+            title: "Toronto Tech Jobs",
             filename: "index.html",
             template: "src/template.html",
             publicPath: "/" // 생성되는 html파일에 script 태그의 src 옵션에 경로의 prefix로 붙는것

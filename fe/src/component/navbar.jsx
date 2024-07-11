@@ -13,7 +13,7 @@ export default function Navbar() {
         <React.Fragment>
             <nav className="nav">
                 <a href="/" className="home-page">
-                    Toronto Job Board
+                    Toronto Tech Jobs
                 </a>
                 <ul>
                     <li className={activePage === "/new-post" ? 'selected' : ''}><a href="/new-post">Post a Job</a></li>
