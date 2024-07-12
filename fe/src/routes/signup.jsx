@@ -19,9 +19,8 @@ export default function SignUp() {
             companyURL: URL,
         }
         axios.post("http://localhost:3000/companies/register", accountJSON).then(res => {
-            console.log(res.data)
+            window.location.href = '/sign-in';
         }).catch(err => {
-            console.log(err)
             setInvalidCredential(err.message)
         })
     }
