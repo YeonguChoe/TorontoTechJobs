@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createContext, useEffect, useState} from "react";
 import ReactDOM from 'react-dom'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./routes/root.jsx";
@@ -39,8 +39,34 @@ const router = createBrowserRouter([
     },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <RouterProvider router={router}/>
-    </React.StrictMode>
-)
+export const LoginStatus = createContext();
+
+const App = () => {
+
+    const [loggedIn, setLoggedIn] = useState({
+        isLoggedIn: false,
+        company: ''
+    })
+
+    useEffect(() => {
+        let token = localStorage.getItem("loginToken");
+        let company = localStorage.getItem("company");
+        if (token !== null && company !== null) {
+            setLoggedIn({
+                isLoggedIn: true,
+                company: company
+            })
+        }
+
+    }, []);
+
+    return (
+        <React.StrictMode>
+            <LoginStatus.Provider value={{loggedIn, setLoggedIn}}>
+                <RouterProvider router={router}/>
+            </LoginStatus.Provider>
+        </React.StrictMode>
+    )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);

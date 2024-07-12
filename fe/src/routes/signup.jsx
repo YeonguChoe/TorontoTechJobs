@@ -8,16 +8,21 @@ export default function SignUp() {
     let [password, setPassword] = useState("");
     let [URL, setURL] = useState("");
 
+    const [invalidCredential, setInvalidCredential] = useState("");
+
     function handleBtn(e) {
         e.preventDefault();
         let accountJSON = {
-            companyName: company,
+            company_name: company,
             email: email,
             password: password,
             companyURL: URL,
         }
         axios.post("http://localhost:3000/companies/register", accountJSON).then(res => {
             console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+            setInvalidCredential(err.message)
         })
     }
 
@@ -35,6 +40,7 @@ export default function SignUp() {
                 <label htmlFor='url'>Company URL: <input type='url' value={URL} onChange={e => setURL(e.target.value)}
                                                          required/> </label><br/>
                 <button type='click' onClick={handleBtn}>Submit</button>
+                {invalidCredential && <h1 style={{color: '#ff0000'}}>{invalidCredential}</h1>}
             </form>
         </React.Fragment>
     )

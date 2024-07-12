@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {LoginStatus} from "../main.jsx";
 
 export default function Post() {
 
     let {postID} = useParams();
 
     const [postDetail, setPostDetail] = useState(null)
+    const {loggedIn, setLoggedIn} = useContext(LoginStatus);
+
 
     useEffect(() => {
         axios.get(`http://localhost:3000/jobs/${postID}`)
@@ -31,11 +34,16 @@ export default function Post() {
                     <h3>{postDetail.location}</h3>
                     <h4>{postDetail.language}</h4>
                     <p>{postDetail.description}</p>
-                    <button onClick={() => {
-                        window.location.href = `/edit/${postID}`
-                    }}>Edit Post
-                    </button>
-                    <button onClick={handleDelete}>Delete post</button>
+                    {loggedIn.isLoggedIn ?
+                        <>
+                            <button onClick={() => {
+                                window.location.href = `/edit/${postID}`
+                            }} style={{cursor: "pointer"}}>Edit Post
+                            </button>
+                            <button onClick={handleDelete} style={{cursor: "pointer"}}>Delete post</button>
+                        </>
+                        :
+                        null}
                 </div>
             )}
         </React.Fragment>

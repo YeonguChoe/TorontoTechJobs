@@ -87,11 +87,11 @@ export default function JobList() {
         <React.Fragment>
             <div>
                 <h2>Job Listing</h2>
-                <button onClick={handleFE}>Frontend</button>
-                <button onClick={handleBE}>Backend</button>
-                <button onClick={handleFullStack}>FullStack</button>
-                <button onClick={handleMobile}>Mobile</button>
-                <button onClick={handleML}>Machine Learning</button>
+                <button onClick={handleFE} style={{cursor: 'pointer'}}>Frontend</button>
+                <button onClick={handleBE} style={{cursor: 'pointer'}}>Backend</button>
+                <button onClick={handleFullStack} style={{cursor: 'pointer'}}>FullStack</button>
+                <button onClick={handleMobile} style={{cursor: 'pointer'}}>Mobile</button>
+                <button onClick={handleML} style={{cursor: 'pointer'}}>Machine Learning</button>
                 <br/>
                 {showNoJobMessage &&
                     <span className='noJob'
@@ -100,7 +100,7 @@ export default function JobList() {
                     {jobPosts.map((item) => (
                         <li onClick={() => {
                             moveToDetailPage(item._id)
-                        }} key={item._id}>
+                        }} key={item._id} style={{cursor: 'pointer'}}>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                         </li>
