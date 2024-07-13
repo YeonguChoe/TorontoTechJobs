@@ -46,7 +46,7 @@ export default function Edit() {
 
     return (
         <React.Fragment>
-            <form>
+            <form className="container">
                 <h1>Edit Post</h1>
                 <label htmlFor='job-field'>Job Field: </label>
                 <select id="job-field" value={jobField} onChange={e => setJobField(e.target.value)}>

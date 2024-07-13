@@ -9,6 +9,7 @@ import SignIn from "./routes/signin.jsx";
 import SignUp from "./routes/signup.jsx";
 import Edit from "./routes/edit.jsx";
 import Account from "./component/account.jsx";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const router = createBrowserRouter([
     {
