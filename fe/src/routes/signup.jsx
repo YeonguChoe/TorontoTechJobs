@@ -25,6 +25,12 @@ export default function SignUp() {
         })
     }
 
+    function handleKeyboard(event) {
+        if (event.key === 'Enter') {
+            handleBtn(event);
+        }
+    }
+
     return (
         <React.Fragment>
             <h1>Sign Up</h1>
@@ -37,7 +43,7 @@ export default function SignUp() {
                 <label htmlFor='pw'>New PW:<input type='password' value={password}
                                                   onChange={e => setPassword(e.target.value)} required/> </label><br/>
                 <label htmlFor='url'>Company URL: <input type='url' value={URL} onChange={e => setURL(e.target.value)}
-                                                         required/> </label><br/>
+                                                         onKeyPress={handleKeyboard} required/> </label><br/>
                 <button type='click' onClick={handleBtn}>Submit</button>
                 {invalidCredential && <h1 style={{color: '#ff0000'}}>{invalidCredential}</h1>}
             </form>

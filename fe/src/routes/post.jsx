@@ -24,6 +24,7 @@ export default function Post() {
         })
     }
 
+
     return (
         <React.Fragment>
             {postDetail && (
@@ -34,7 +35,7 @@ export default function Post() {
                     <h3>{postDetail.location}</h3>
                     <h4>{postDetail.language}</h4>
                     <p>{postDetail.description}</p>
-                    {loggedIn.isLoggedIn ?
+                    {(loggedIn.isLoggedIn && (postDetail && (postDetail.company_name === localStorage.getItem("company")))) ?
                         <>
                             <button onClick={() => {
                                 window.location.href = `/edit/${postID}`

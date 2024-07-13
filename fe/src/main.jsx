@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from "react";
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./routes/root.jsx";
 import ErrorPage from "./error-page.jsx";
@@ -8,6 +8,7 @@ import Create from "./routes/create.jsx";
 import SignIn from "./routes/signin.jsx";
 import SignUp from "./routes/signup.jsx";
 import Edit from "./routes/edit.jsx";
+import Account from "./component/account.jsx";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "sign-up",
                 element: <SignUp/>
+            },
+            {
+                path: "my-posts",
+                element: <Account/>
             }
         ]
     },

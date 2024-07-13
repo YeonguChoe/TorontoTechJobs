@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import "../styles/nav-bar.css"
 import {LoginStatus} from "../main.jsx";
+import {Link} from "react-router-dom";
 
 export default function Navbar() {
 
@@ -18,6 +19,11 @@ export default function Navbar() {
         window.location.reload();
     }
 
+    const moveToMyPosts = () => {
+        window.location.href = "/my-posts"
+    }
+
+
     return (
         <React.Fragment>
             <nav className="nav">
@@ -30,6 +36,7 @@ export default function Navbar() {
                             <li className={activePage === "/new-post" ? 'selected' : ''} style={{cursor: 'pointer'}}><a
                                 href="/new-post">Post a Job</a></li>
                             <li style={{cursor: 'pointer'}} onClick={signOut}>Signout</li>
+                            <li style={{cursor: 'pointer'}} onClick={moveToMyPosts}>My Posts</li>
                         </>
                         :
                         <>

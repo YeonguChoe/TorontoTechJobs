@@ -1,19 +1,19 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import axios from "axios";
+import {LoginStatus} from "../main.jsx";
 
 export default function Create() {
     const [jobTitle, setJobTitle] = useState("Input Job title");
-    const [companyName, setCompanyName] = useState("Samsung Electronics");
+    const [companyName, setCompanyName] = useState("");
     const [location, setLocation] = useState("Ontario");
     const [jobType, setJobType] = useState("frontend");
     const [description, setDescription] = useState("Input Text");
 
+    const loginInfo = useContext(LoginStatus);
+    console.log(loginInfo);
+
     function updateTitle(e) {
         setJobTitle(e.target.value)
-    }
-
-    function updateCompany(e) {
-        setCompanyName(e.target.value)
     }
 
     function updateLocation(e) {
@@ -29,12 +29,13 @@ export default function Create() {
         setDescription(e.target.value)
     }
 
+
     function handleSubmitBtn(e) {
         e.preventDefault();
 
         const newJSON = {
             title: jobTitle,
-            company_name: companyName,
+            company_name: localStorage.getItem("company"),
             location: location,
             job_type: jobType,
             description: description

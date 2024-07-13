@@ -36,14 +36,23 @@ export default function SignIn() {
             });
     }
 
+    function handleKeyboard(event) {
+        if (event.key === 'Enter') {
+            handleSignInBtn();
+        }
+    }
+
     return (
         <React.Fragment>
             <h1>Sign In</h1>
             <form>
                 <label htmlFor='email'>Company Email:</label>
-                <input type="email" id='email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <input type="email" id='email' value={email} onChange={e => setEmail(e.target.value)}
+                       onKeyPress={handleKeyboard}/>
                 <label htmlFor='pw' value={password}>Password</label>
-                <input type="password" id='pw' onChange={e => setPassword(e.target.value)}/>
+                <input type="password" id='pw' onChange={e => setPassword(e.target.value)}
+                       onKeyPress={handleKeyboard}
+                />
                 <button type="button" onClick={handleSignInBtn}>Sign In</button>
             </form>
             <br/>

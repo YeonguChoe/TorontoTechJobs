@@ -5,6 +5,7 @@ import JobList from "../component/joblist.jsx";
 
 export default function Root() {
     const [atHomePage, setAtHomePage] = useState(false)
+
     useEffect(() => {
         if (window.location.pathname === "/") {
             setAtHomePage(true)
