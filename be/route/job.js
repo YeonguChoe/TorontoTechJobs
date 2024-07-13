@@ -188,7 +188,7 @@ router.patch(
             .optional()
             .isString()
             .withMessage("Location must be a string"),
-        body("jobType")
+        body("job_type")
             .optional()
             .isIn(["frontend", "backend", "fullstack", "mobile", "machine learning"])
             .withMessage("Invalid job type"),

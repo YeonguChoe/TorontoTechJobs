@@ -16,7 +16,7 @@ export default function Edit() {
     useEffect(() => {
         axios.get(`http://localhost:3000/jobs/${postID}`).then(res => {
             setTitle(res.data.title);
-            setJobField(res.data.language);
+            setJobField(res.data.job_type);
             setCompany(res.data.company);
             setLastEdit(res.data.postedDate);
             setLocation(res.data.location);
@@ -34,7 +34,7 @@ export default function Edit() {
             title: title,
             company: company,
             location: location,
-            language: jobField,
+            job_type: jobField,
             description: description
         };
 
