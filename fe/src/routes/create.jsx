@@ -10,7 +10,6 @@ export default function Create() {
     const [description, setDescription] = useState("Input Text");
 
     const loginInfo = useContext(LoginStatus);
-    console.log(loginInfo);
 
     function updateTitle(e) {
         setJobTitle(e.target.value)
@@ -32,19 +31,26 @@ export default function Create() {
 
     function handleSubmitBtn(e) {
         e.preventDefault();
+        let companyName = localStorage.getItem("company");
+        let jwtToken = localStorage.getItem("loginToken");
 
         const newJSON = {
             title: jobTitle,
-            company_name: localStorage.getItem("company"),
+            company_name: companyName,
             location: location,
             job_type: jobType,
             description: description
         };
 
-        axios.post("http://localhost:3000/jobs", newJSON).then(res => {
-            window.location.href = '/'
+        const configuration = {
+            headers: {Authorization: `Bearer ${jwtToken}`}
+        };
+        axios.post("http://localhost:3000/jobs", newJSON, configuration)
+            .then(res => {
+                window.location.href = '/'
+            }).catch(err => {
+            console.log(err);
         })
-
     }
 
     return (
@@ -77,9 +83,7 @@ export default function Create() {
                     <input type='text' value={location} onChange={updateLocation} required/>
                 </label>
                 <br/>
-
                 <label>Job Explanation: <br/><textarea value={description} onChange={updateDescription}/></label>
-
                 <br/>
                 <button type='submit' onClick={handleSubmitBtn}>Create Post</button>
             </form>

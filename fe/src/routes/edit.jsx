@@ -25,6 +25,10 @@ export default function Edit() {
     }, []);
 
     function handleEditBtn() {
+        let jwtToken = localStorage.getItem("loginToken")
+        const configuration = {
+            headers: {Authorization: `Bearer ${jwtToken}`}
+        };
 
         let newJSON = {
             title: title,
@@ -34,9 +38,10 @@ export default function Edit() {
             description: description
         };
 
-        axios.patch(`http://localhost:3000/jobs/${postID}`, newJSON).then(res => {
-            window.location.href = '/';
-        })
+        axios.patch(`http://localhost:3000/jobs/${postID}`, newJSON, configuration)
+            .then(res => {
+                window.location.href = '/';
+            })
     }
 
     return (

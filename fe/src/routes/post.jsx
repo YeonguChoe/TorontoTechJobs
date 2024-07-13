@@ -19,8 +19,16 @@ export default function Post() {
     }, [postID]);
 
     function handleDelete() {
-        axios.delete(`http://localhost:3000/jobs/${postID}`).then(res => {
-            window.location.href = '/'
+        let jwtToken = localStorage.getItem("loginToken")
+        const configuration = {
+            headers: {Authorization: `Bearer ${jwtToken}`}
+        };
+
+        axios.delete(`http://localhost:3000/jobs/${postID}`, configuration)
+            .then(res => {
+                window.location.href = '/'
+            }).catch((err) => {
+            console.log(err)
         })
     }
 

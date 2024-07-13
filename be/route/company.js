@@ -37,7 +37,7 @@ router.post(
       await company.save();
 
       const payload = { id: company.id, company_name: company.company_name };
-      const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "2h" });
+      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "2h" });
 
       res.status(201).json({ token, company: payload });
     } catch (err) {
@@ -70,7 +70,7 @@ router.post(
       if (!isMatch) return res.status(400).json({ message: false });
 
       const payload = { id: company.id, company_name: company.company_name };
-      const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
+      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1h" });
 
       res.json({ token, company: payload });
     } catch (err) {

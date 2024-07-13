@@ -28,7 +28,6 @@ export default function JobList() {
             });
     }
 
-
     function handleFE() {
         axios.get("http://localhost:3000/jobs/filter-by-job-type?job_type=frontend")
             .then(res => {
@@ -76,7 +75,6 @@ export default function JobList() {
                 setShowNoJobMessage(true);
             });
     }
-
 
     function moveToDetailPage(jobID) {
         window.location.href = `/post/${jobID}`

@@ -36,7 +36,9 @@ export default function Navbar() {
                             <li className={activePage === "/new-post" ? 'selected' : ''} style={{cursor: 'pointer'}}><a
                                 href="/new-post">Post a Job</a></li>
                             <li style={{cursor: 'pointer'}} onClick={signOut}>Signout</li>
-                            <li style={{cursor: 'pointer'}} onClick={moveToMyPosts}>My Posts</li>
+                            <li className={activePage === "/my-posts" ? 'selected' : ''} style={{cursor: 'pointer'}}
+                                onClick={moveToMyPosts}>My Posts
+                            </li>
                         </>
                         :
                         <>

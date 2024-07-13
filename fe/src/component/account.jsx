@@ -10,7 +10,13 @@ export default function Account() {
 
     useEffect(() => {
         let loggedInCompany = localStorage.getItem("company");
-        axios.get(`http://localhost:3000/jobs/filter-by-company-name?company_name=${loggedInCompany}`)
+
+        let jwtToken = localStorage.getItem("loginToken")
+        const configuration = {
+            headers: {Authorization: `Bearer ${jwtToken}`}
+        };
+
+        axios.get(`http://localhost:3000/jobs/filter-by-company-name?company_name=${loggedInCompany}`, configuration)
             .then(res => {
                 setPostList(res.data)
                 setNoJobs(false)
