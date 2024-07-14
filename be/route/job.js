@@ -3,6 +3,7 @@ const router = express.Router();
 const {query, body, param, validationResult} = require("express-validator");
 const Job = require("../model/Job");
 const jwt = require("jsonwebtoken");
+const Company = require("../model/Company");
 
 // Route to get all job postings
 router.get("/", async (req, res) => {
@@ -163,11 +164,15 @@ router.get(
             return res.status(400).json({errors: errors.array()});
         }
         try {
-            const job = await Job.findById(req.params.id);
+            let job = await Job.findById(req.params.id);
             if (!job) {
                 return res.status(404).json({message: "Job not found"});
             }
-            res.json(job);
+
+            let company = await Company.findOne({company_name: job.company_name});
+            let jobCopy = JSON.parse(JSON.stringify(job));
+            jobCopy.email = company.email;
+            res.json(jobCopy);
         } catch (err) {
             res.status(500).json({message: err.message});
         }

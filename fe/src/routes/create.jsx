@@ -99,12 +99,12 @@ export default function Create() {
         </div>
         <label className="form-label">
           Job Explanation:
-          <textarea
-            className="form-control"
-            rows="5"
-            value={description}
-            onChange={updateDescription}
-          />
+            <textarea
+              className="form-control"
+              rows="5"
+              value={description}
+              onChange={updateDescription}
+            />
         </label>
       </form>
       <button
