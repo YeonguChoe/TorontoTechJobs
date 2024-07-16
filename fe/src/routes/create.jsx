@@ -4,7 +4,6 @@ import { LoginStatus } from "../main.jsx";
 
 export default function Create() {
   const [jobTitle, setJobTitle] = useState("Input Job title");
-  const [companyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("Ontario");
   const [jobType, setJobType] = useState("frontend");
   const [description, setDescription] = useState("Input Text");

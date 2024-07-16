@@ -22,7 +22,7 @@ const MainPage = () => {
   function moveToDetailPage(jobID) {
     window.location.href = `/post/${jobID}`;
   }
-  
+
   function formatDate(dateString) {
     const date = new Date(dateString);
     const monthNames = [
@@ -110,7 +110,7 @@ const MainPage = () => {
                     </div>
                     <div className="d-flex justify-content-end mt-1">
                       <span
-                        class={`badge ${
+                        className={`badge ${
                           item.job_type === "frontend"
                             ? "text-bg-primary"
                             : item.job_type === "backend"
@@ -131,7 +131,7 @@ const MainPage = () => {
             ))}
           </div>
         </div>
-        <a class="btn btn-outline-primary" href="/job-list" role="button">
+        <a className="btn btn-outline-primary" href="/job-list" role="button">
           View More Jobs
         </a>
       </div>

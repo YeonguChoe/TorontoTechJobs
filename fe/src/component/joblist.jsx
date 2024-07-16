@@ -231,7 +231,7 @@ export default function JobList() {
                 </div>
                 <div className="d-flex justify-content-end mt-1">
                   <span
-                    class={`badge ${
+                    className={`badge ${
                       item.job_type === "frontend"
                         ? "text-bg-primary"
                         : item.job_type === "backend"

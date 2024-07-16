@@ -35,7 +35,7 @@ export default function SignUp() {
 
   return (
     <div className="container">
-      <h1>Sign Up</h1>
+      <h2>Sign Up</h2>
       <form>
         <label htmlFor="company">
           Company name:{" "}
@@ -47,7 +47,6 @@ export default function SignUp() {
             required
           />
         </label>{" "}
-        <br />
         <label htmlFor="id">
           Email:{" "}
           <input
