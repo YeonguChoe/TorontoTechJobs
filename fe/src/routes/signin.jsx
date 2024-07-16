@@ -22,16 +22,16 @@ export default function SignIn() {
         if (res.status === 200) {
           setLoggedIn({
             isLoggedIn: true,
-            company: res.data.company, // 서버에서 받아온 회사 정보
+            company: res.data.company,
           });
 
           localStorage.setItem("loginToken", res.data.token);
-          localStorage.setItem("company", res.data.company.company_name); // 예시: 회사 이름 저장
-          window.location.href = "/"; // 로그인 성공 후 홈페이지로 이동
+          localStorage.setItem("company", res.data.company.company_name);
+          window.location.href = "/";
         }
       })
       .catch((err) => {
-        setLogInFail("Login has failed!!!"); // 로그인 실패 시 메시지 설정
+        setLogInFail("Login has failed.");
       });
   }
 

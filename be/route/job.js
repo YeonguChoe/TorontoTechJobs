@@ -91,6 +91,16 @@ router.delete(
   }
 );
 
+// Route to get a most recent jobs.
+router.get("/recent", async (req, res) => {
+  try {
+    const jobs = await Job.find().sort({ posted_date: -1 }).limit(5); // Sort by most recent
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Route to get a job by company_name
 router.get(
   "/filter-by-company-name",
@@ -118,11 +128,9 @@ router.get(
           }
           const jobs = await Job.find({ company_name: company_name });
           if (jobs.length === 0) {
-            return res
-              .status(404)
-              .json({
-                message: "No jobs found for the specified company_name",
-              });
+            return res.status(404).json({
+              message: "No jobs found for the specified company_name",
+            });
           }
           res.json(jobs);
         } catch (err) {
