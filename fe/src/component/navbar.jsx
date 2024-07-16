@@ -35,7 +35,7 @@ export default function Navbar() {
             />
             Toronto Tech Jobs
           </a>
-          <ul className="navbar-nav ms-auto d-flex flex-row">
+          <ul className="nav navbar-nav ms-auto d-flex flex-row">
             {loggedIn.isLoggedIn ? (
               <>
                 <li

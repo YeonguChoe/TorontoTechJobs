@@ -61,7 +61,7 @@ export default function Create() {
         <label className="form-label">
           Job Title:
           <input
-            type="email"
+            type="text"
             className="form-control"
             value={jobTitle}
             onChange={updateTitle}
@@ -99,12 +99,12 @@ export default function Create() {
         </div>
         <label className="form-label">
           Job Explanation:
-            <textarea
-              className="form-control"
-              rows="5"
-              value={description}
-              onChange={updateDescription}
-            />
+          <textarea
+            className="form-control"
+            rows="5"
+            value={description}
+            onChange={updateDescription}
+          />
         </label>
       </form>
       <button

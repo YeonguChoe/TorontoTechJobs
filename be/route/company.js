@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Company = require("../model/Company");
-const { body, validationResult } = require("express-validator");
+const { query, body, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 
 // Company registration route
@@ -37,7 +37,9 @@ router.post(
       await company.save();
 
       const payload = { id: company.id, company_name: company.company_name };
-      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "2h" });
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: "2h",
+      });
 
       res.status(201).json({ token, company: payload });
     } catch (err) {
@@ -70,7 +72,9 @@ router.post(
       if (!isMatch) return res.status(400).json({ message: false });
 
       const payload = { id: company.id, company_name: company.company_name };
-      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1h" });
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: "1h",
+      });
 
       res.json({ token, company: payload });
     } catch (err) {
@@ -123,6 +127,41 @@ router.patch(
       res.json(company);
     } catch (err) {
       res.status(400).json({ message: err.message });
+    }
+  }
+);
+
+router.get(
+  "/filter-by-company-name",
+  [
+    query("company_name")
+      .exists()
+      .withMessage("company_name query parameter is required")
+      .isString()
+      .withMessage("Invalid company_name"),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const { company_name } = req.query; // Get the company_name from the query parameters
+      if (!company_name) {
+        return res
+          .status(400)
+          .json({ message: "company_name query parameter is required" });
+      }
+      const company = await Company.find({ company_name: company_name });
+      if (company.length === 0) {
+        return res.status(404).json({
+          message: "No company found for the specified company_name",
+        });
+      }
+      res.json(company);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
   }
 );

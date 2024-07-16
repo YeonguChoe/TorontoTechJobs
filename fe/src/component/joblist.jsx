@@ -111,10 +111,30 @@ export default function JobList() {
     window.location.href = `/post/${jobID}`;
   }
 
-  function formatDate(posted_date) {
-    const date = new Date(posted_date);
-    const formattedDate = date.toLocaleDateString("en-CA", { timeZone: "UTC" });
-    return formattedDate;
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    return `${monthNames[monthIndex]} ${day}${
+      day === 1 ? "st" : day === 2 ? "nd" : day === 3 ? "rd" : "th"
+    }, ${year}`;
   }
 
   return (
@@ -196,19 +216,20 @@ export default function JobList() {
                   {formatDate(item.posted_date)}
                 </small>
                 <div className="d-flex justify-content-end">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-geo-alt-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                  </svg>
-                  {item.location}
+                  <span className="badge text-bg-secondary">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="13"
+                      fill="currentColor"
+                      className="bi bi-geo-alt-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <span className="ms-1">{item.location}</span>
+                  </span>
                 </div>
-                <div className="d-flex justify-content-end">
+                <div className="d-flex justify-content-end mt-1">
                   <span
                     class={`badge ${
                       item.job_type === "frontend"
