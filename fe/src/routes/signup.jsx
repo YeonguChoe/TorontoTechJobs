@@ -23,7 +23,7 @@ export default function SignUp() {
                 window.location.href = "/sign-in";
             })
             .catch((err) => {
-                setInvalidCredential(err.message);
+                setInvalidCredential("Sign Up failed!");
             });
     }
 
@@ -35,43 +35,55 @@ export default function SignUp() {
 
     return (
         <React.Fragment>
-            <form>
-                <h2 className='mb-3'>Sign Up</h2>
-                <div>
-                    <label for="company_name">Company</label>
-                    <div id='explanation' className='form-text'>We require company name for verification.</div>
-                    <input
-                        type='text'
-                        className='form-control'
-                        id='company_name'
-                        onChange={e => setCompany(e.target.value)}
-                        aria-describedby='explanation'
-                        required
-                    />
+            <div className='container'>
+                <form>
+                    <h2 className='mb-3'>Sign Up</h2>
+                    <div className='d-flex justify-content-center align-items-center flex-column mb-2'>
+                        <label for="company_name">Company</label>
+                        <input
+                            type='text'
+                            className='form-control'
+                            id='company_name'
+                            onChange={e => setCompany(e.target.value)}
+                            style={{width: '30%'}}
+                            required
+                        />
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center flex-column mb-2'>
+                        <label for='company_url'>Company URL</label>
+                        <input type='url'
+                               className='form-control'
+                               id='company_url'
+                               onChange={(e) => setURL(e.target.value)}
+                               style={{width: '30%'}}
+                               required/>
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center flex-column mb-2'>
+                        <label for='company_email' className='form-label'>Email</label>
+                        <input type='email' className='form-control' id='company_email'
+                               onChange={e => setEmail(e.target.value)}
+                               style={{width: '30%'}}
+                               required/>
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center flex-column mb-2'>
+                        <label for='password' className='form-label'>Password</label>
+                        <input type='password' className='form-control' id='password'
+                               onChange={e => setPassword(e.target.value)}
+                               style={{width: '30%'}}
+                               required
+                        />
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center flex-column mb-2'>
+                        <button className='btn btn-outline-primary' style={{width: '30%'}} onClick={handleBtn}>Submit</button>
+                    </div>
+                </form>
+
+                <div className="d-flex justify-content-center align-items-center">
+                    {invalidCredential && (
+                        <h5 style={{color: "#ff0000"}}>{invalidCredential}</h5>
+                    )}
                 </div>
-                <div>
-                    <label for='company_url'>Company URL</label>
-                    <input type='url'
-                           className='form-control'
-                           id='company_url'
-                           onChange={(e) => setURL(e.target.value)}
-                           required/>
-                </div>
-                <div>
-                    <label for='company_email' className='form-label'>Email</label>
-                    <input type='email' className='form-control' id='company_email'
-                           onChange={e => setEmail(e.target.value)} required/>
-                </div>
-                <div>
-                    <label for='password' className='form-label'>Password</label>
-                    <input type='password' className='form-control' id='password'
-                           onChange={e => setPassword(e.target.value)}/>
-                </div>
-                <button className='btn btn-primary' onClick={handleBtn}>Submit</button>
-            </form>
-            {invalidCredential && (
-                <h1 style={{color: "#ff0000"}}>{invalidCredential}</h1>
-            )}
+            </div>
         </React.Fragment>
     );
 }
