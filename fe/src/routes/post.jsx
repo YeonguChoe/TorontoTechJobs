@@ -41,7 +41,6 @@ export default function Post() {
                 window.location.href = "/";
             })
             .catch((err) => {
-                console.log(err);
             });
     }
 

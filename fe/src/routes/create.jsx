@@ -21,7 +21,6 @@ export default function Create() {
     }
 
     function updateJobField(e) {
-        console.log(e.target);
         setJobType(e.target.value);
     }
 
@@ -53,7 +52,6 @@ export default function Create() {
                     window.location.href = "/";
                 })
                 .catch((err) => {
-                    console.log(err);
                 });
         } else {
             setEmptyField("There exist empty field.");
