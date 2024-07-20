@@ -16,7 +16,7 @@ export default function Account() {
 
     axios
       .get(
-        `http://localhost:3000/jobs/filter-by-company-name?company_name=${loggedInCompany}`,
+        `${process.env.SERVER_ADDRESS}/jobs/filter-by-company-name?company_name=${loggedInCompany}`,
         configuration
       )
       .then((res) => {

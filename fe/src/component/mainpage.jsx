@@ -8,7 +8,7 @@ const MainPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/jobs/recent")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/recent`)
       .then((res) => {
         setRecentJobs(res.data.slice(0, 5));
         setShowNoJobMessage(res.data.length === 0);

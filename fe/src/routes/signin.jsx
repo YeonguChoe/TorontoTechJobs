@@ -17,7 +17,7 @@ export default function SignIn() {
       password: password,
     };
     axios
-      .post("http://localhost:3000/companies/login", newJSON)
+      .post(`${process.env.SERVER_ADDRESS}/companies/login`, newJSON)
       .then((res) => {
         if (res.status === 200) {
           setLoggedIn({

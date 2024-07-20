@@ -10,7 +10,7 @@ export default function JobList() {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3000/jobs/")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(res.data.length === 0);
@@ -24,7 +24,7 @@ export default function JobList() {
   function handleAll() {
     handleTabClick("all");
     axios
-      .get("http://localhost:3000/jobs/")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(res.data.length === 0);
@@ -38,7 +38,7 @@ export default function JobList() {
   function handleBE() {
     handleTabClick("backend");
     axios
-      .get("http://localhost:3000/jobs/filter-by-job-type?job_type=backend")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/filter-by-job-type?job_type=backend`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(false);
@@ -52,7 +52,7 @@ export default function JobList() {
   function handleFE() {
     handleTabClick("frontend");
     axios
-      .get("http://localhost:3000/jobs/filter-by-job-type?job_type=frontend")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/filter-by-job-type?job_type=frontend`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(false);
@@ -67,7 +67,7 @@ export default function JobList() {
     handleTabClick("machine_learning");
     axios
       .get(
-        "http://localhost:3000/jobs/filter-by-job-type?job_type=machine%20learning"
+        `${process.env.SERVER_ADDRESS}/jobs/filter-by-job-type?job_type=machine%20learnin`
       )
       .then((res) => {
         setJobPosts(res.data);
@@ -82,7 +82,7 @@ export default function JobList() {
   function handleMobile() {
     handleTabClick("mobile");
     axios
-      .get("http://localhost:3000/jobs/filter-by-job-type?job_type=mobile")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/filter-by-job-type?job_type=mobile`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(false);
@@ -96,7 +96,7 @@ export default function JobList() {
   function handleFullStack() {
     handleTabClick("fullstack");
     axios
-      .get("http://localhost:3000/jobs/filter-by-job-type?job_type=fullstack")
+      .get(`${process.env.SERVER_ADDRESS}/jobs/filter-by-job-type?job_type=fullstack`)
       .then((res) => {
         setJobPosts(res.data);
         setShowNoJobMessage(false);

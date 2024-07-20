@@ -18,7 +18,7 @@ export default function SignUp() {
       companyURL: URL,
     };
     axios
-      .post("http://localhost:3000/companies/register", accountJSON)
+      .post(`${process.env.SERVER_ADDRESS}/companies/register`, accountJSON)
       .then((res) => {
         window.location.href = "/sign-in";
       })
